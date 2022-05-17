@@ -15,7 +15,7 @@ var
   // main
 begin
 
-  try // outer app try block
+  try 
     lSpiel := TSpiel.create;
     lSpiel.verarbeiteEingabe(lSpiel.verarbeiteCmdZeile);
   except

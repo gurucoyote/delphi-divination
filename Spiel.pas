@@ -1,4 +1,4 @@
-unit Spiel;
+﻿unit Spiel;
 
 interface
 
@@ -228,7 +228,7 @@ begin
       end;
       lLastInput := lInput;
     until lInput = '.';
-    showOutput('Und Tschuess!');
+    showOutput('Und Tschüß!');
   finally
     lCmdList.Free;
   end;
@@ -236,10 +236,7 @@ end; // verarbeiteEingabe
 
 procedure TSpiel.showOutput(s: String);
 begin
-  SetConsoleOutputCP(CP_UTF8);
-  SetTextCodePage(Output, CP_UTF8);
-
-  WriteLn(Utf8String(s));
+  WriteLn(s);
 end;
 
 end.
