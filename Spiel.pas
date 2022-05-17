@@ -2,7 +2,6 @@
 
 
   interface
-
 uses
 	Classes, // Unit containing the tstringlist 
 	Generics.Collections;
@@ -23,7 +22,7 @@ type
 	FKarten: TObjectList<TKarte>;
 constructor create(deckName: String);
 	function zieheKarte(): TKarte;
-	procedure  neuMischen;
+	procedure  mischen;
 			 end;
 
   type
@@ -40,11 +39,13 @@ end;
 implementation
 uses 
 IniFiles,
-SysUtils;
+SysUtils,
+System.Generics.Defaults;
 
 			 constructor TKarte.create(name: String; zahl: Integer; hell: String; dunkel: String);
-			 begin
-				 FName := name;
+begin
+	inherited Create;
+	FName := name;
 				 FZahl := zahl;
 				 FHell := hell;
 				 FDunkel := dunkel;
@@ -61,7 +62,6 @@ begin
 	  Result :=  ExtractFilePath(ParamStr(0)) + deckName + '.deck';
 end;
 
-// TODO: turn into a constructor
 constructor TStapel.create(deckName: String);
 var 
   ini: TIniFile;
@@ -70,6 +70,7 @@ var
   i: Integer;
   karte: TKarte;
 begin
+	inherited Create;
 	// set our name
 	FName := deckName;
 	// create our card list
@@ -105,8 +106,15 @@ begin
 	Result  := FKarten.extract( FKarten[0]);
 end;
 
-	procedure  TStapel.neuMischen;
-	begin
+procedure  TStapel.mischen;
+begin
+	FKarten.Sort(TComparer<TKarte>.Construct(
+		function (const L, R: TKarte): integer
+begin
+	randomize;
+	Result:=-1 + Random(3);
+end
+));
 	end;
 
 end.

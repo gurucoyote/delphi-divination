@@ -2,6 +2,8 @@
 hell=Die helle Seite
 dunkel=Die dunkle Seite
 [Karte 2]
-hell=Zeir heller
+hell=Zweiter heller
 dunkel=Noch dunkler
-
+[Dritte Karte]
+hell=3x hell
+dunkel=dreifach dunkel

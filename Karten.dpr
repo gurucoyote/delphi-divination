@@ -17,6 +17,7 @@ begin
 	  // create a TStapel
 	  // and load a test deck
 	  stapel := TStapel.create('test');
+	  stapel.mischen;
 	  Writeln(IntToStr(stapel.FKarten.count) + 'Karten geladen');
 	  for i := 1 to stapel.FKarten.count  do
 	  begin
