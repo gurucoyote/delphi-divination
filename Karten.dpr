@@ -44,12 +44,24 @@ begin
 
 	// main
 begin
-	WriteLn('Halöchen');
 	SetConsoleOutputCP(CP_UTF8);
 	SetTextCodePage(Output, CP_UTF8);
-	// WriteLn(utf8string('Hllöchen!'));
-	WriteLn('Halöchen');
 	try
+		// handle command line params
+		if FindCmdLineSwitch( 'l', lInput) then
+		begin
+			laden(lInput);
+			if FindCmdLineSwitch( 'z', lInput) then
+			begin
+				try
+					ziehen(StrToInt(lInput));
+				except
+					ziehen(1);
+				end;
+			end;
+		end;
+
+// handle interactive user input
 	lCmdList := TStringList.create;
 	try
 		lLastInput := '.';
