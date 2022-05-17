@@ -1,9 +1,106 @@
-[Karte 1]
-hell=Die helle Seite
-dunkel=Die dunkle Seite
-[Karte 2]
-hell=Zweiter heller
-dunkel=Noch dunkler
-[Dritte Karte]
-hell=3x hell
-dunkel=dreifach dunkel
+﻿    [Herbst]
+hell=Überfluss
+dunkel=Mangel
+    [Der Basilisk]
+dunkel=Verfall
+hell=Erholung
+    [Der Schöpfer]
+dunkel=Verlassen
+hell=Versorgen
+    [Tod]
+dunkel=Stase
+hell=Wandel
+    [Der Verteidiger]
+dunkel=Gefahr
+hell=Sicherheit
+    [Der Drache]
+dunkel=Blinde Wut
+hell=Schläue
+    [In Rüstung untergehen]
+hell=Wahre Umsicht
+dunkel=Aus Schutz wird Gefahr
+    [Der Adler]
+dunkel=Gedankenlosigkeit
+hell=Der Geist obsiegt
+    [Furcht vor den Schatten]
+hell=Sicherheit erkennen
+dunkel=Unnötige Angst
+    [Fruchtbarkeit]
+dunkel=Niedergang
+hell=Wachstum
+    [Der Fisch]
+dunkel=Oberflächlichkeit
+hell=Die Seele obsiegt
+    [Der Narr]
+dunkel=Naivität
+hell=Freiheit
+    [Der Greif]
+dunkel=Feigheit
+hell=Tapferkeit
+    [Der Eremit]
+dunkel=Einsamkeit
+hell=Weisheit
+    [Inspiration]
+dunkel=Ideenlosigkeit
+hell=Schöpfungskraft
+    [Der König]
+dunkel=Tyrannei
+hell=Authorität
+    [Wissen]
+dunkel=Falschheit
+hell=Wahrheit
+    [Gesetz]
+dunkel=Verrat
+hell=Dogma
+    [Der Löwe]
+dunkel=Schwäche
+hell=Der Körper obsiegt
+    [Natur]
+dunkel=Verbrauchte Energie
+hell=Lebenskraft
+    [Den Diamanten übersehen ]
+hell=Chancen erkennen
+dunkel=Chancen übersehen
+    [Der Bauer]
+dunkel=Engstirnigkeit
+hell=Rohe Kraft 
+    [Der Phönix]
+dunkel=Zerstörung
+hell=Wiedergeburt
+    [Die Priesterin]
+dunkel=Elfenbeinturm
+hell=Geheimnisse verstehen
+    [Der Satyr]
+hell=Mäßigung
+dunkel=Maßlosigkeit
+    [Der Schmied]
+dunkel=Sinnlosigkeit
+hell=Produktivität
+    [Der Soldat]
+dunkel=Blinder Gehorsam
+hell=Pflicht
+    [Steine säen]
+hell=Sinnlose Arbeit beenden
+dunkel=Sinnlose Arbeit
+    [Frühling]
+dunkel=Stillstand
+hell=Neues Wachstum
+    [Drachenschwanz schlagen]
+hell=Das größere Problem erkennen
+dunkel=Die Herausforderung unterschätzen
+    [Sommer]
+dunkel=Erschöpfung
+hell=Energie
+    [Gaunerei]
+hell=Täuschung aufgedeckt
+dunkel=Täuschung
+    [Das Einhorn]
+dunkel=Versuchung
+hell=Reinheit
+    [Der Thronräuber
+    [Krieg]
+dunkel=Vergebliche Mühe
+hell=Großer Einsatz
+    [Winter]
+dunkel=Unerfahrenheit
+hell=Reife
