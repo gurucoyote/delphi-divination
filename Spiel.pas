@@ -71,7 +71,7 @@ end;
 
 constructor TStapel.create(deckName: String);
 var 
-  ini: TIniFile;
+  ini: TmemIniFile;
   filename: String;
   cards: TStringList;
   i: Integer;
@@ -85,13 +85,12 @@ begin
 
 	filename := deckDatei(deckName);
   // TODO: first check if deck file with given name exists
-    ini := TIniFile.Create(filename);
+    ini := TMemIniFile.Create(filename, TEncoding.UTF8);
 	cards := TStringList.create;
 
     try
-	    // Writeln('read all cards for ' + deckName + ' from ' +fileName); exit;
+	    // ini.WriteString('Meine Straße', 'Haus', 'tröt');
 	     ini.readSections(cards);
-	     // Writeln('output each card : ' + IntToStr(cards.count));
 	     for i := 0 to cards.count -1 do
 		     begin
 		     karte := TKarte.create(

@@ -1,4 +1,4 @@
-program Karten;
+﻿program Karten;
 
 {$APPTYPE CONSOLE}
 
@@ -6,6 +6,7 @@ program Karten;
 
 uses
 	System.SysUtils,
+	Windows,
 	Classes,
 	Spiel in 'Spiel.pas';
 
@@ -31,7 +32,8 @@ begin
 		for i := 1 to anz  do
 		begin
 			k := stapel.zieheKarte;
-			Writeln(IntToStr(i) + '. gezogen:'+  SLineBreak + k.aufdecken);
+			WriteLn(IntToStr(i) + ' gezogen:');
+			WriteLn(Utf8String(k.aufdecken));
 			if k.FZahl = 0 then
 				break;
 			end; // end loop
@@ -42,6 +44,11 @@ begin
 
 	// main
 begin
+	WriteLn('Halöchen');
+	SetConsoleOutputCP(CP_UTF8);
+	SetTextCodePage(Output, CP_UTF8);
+	// WriteLn(utf8string('Hllöchen!'));
+	WriteLn('Halöchen');
 	try
 	lCmdList := TStringList.create;
 	try
@@ -53,11 +60,11 @@ begin
 
 	lCmdList.clear;
 ExtractStrings([' '], [], PChar(lInput), lCmdList);
-var c: Integer;
-for c := 0 to lCmdList.count-1 do
-	begin
-	WriteLn(lCmdList[c]);
-end;
+// var c: Integer;
+// for c := 0 to lCmdList.count-1 do
+// 	begin
+// 	WriteLn(lCmdList[c]);
+// end;
 
 			case lCmdList[0][1] of
 			'l': begin
@@ -74,6 +81,7 @@ end;
 			end;
 			'm': laden(stapel.FName);
 			'q': lInput := '.';// end this loop
+			'.': WriteLn('Und Tschüß');
 		else  WriteLn('unbekannter Befehl ' + lInput);
 	end;
 	lLastInput := lInput;
