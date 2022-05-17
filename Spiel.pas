@@ -4,6 +4,7 @@ interface
 
 uses
   Classes, // Unit containing the tstringlist
+  Windows,
   Generics.Collections;
 
 type
@@ -38,6 +39,7 @@ type
     procedure verarbeiteEingabe(lastInput: String);
     procedure laden(deckName: String);
     procedure ziehen(anz: Integer);
+    procedure showOutput(s: String);
   end;
 
 implementation
@@ -74,8 +76,6 @@ begin
         s := s + sLineBreak + 'Hell: ' + FHell;
         s := s + sLineBreak + '(dunkel: ' + FDunkel + ')';
       end;
-  else
-    Writeln('huh?');
   end;
   Result := s;
 end;
@@ -105,7 +105,6 @@ begin
   cards := TStringList.create;
 
   try
-    // ini.WriteString('Meine Straße', 'Haus', 'tröt');
     ini.readSections(cards);
     for i := 0 to cards.count - 1 do
     begin
@@ -143,7 +142,7 @@ procedure TSpiel.laden(deckName: String);
 begin
   FStapel := TStapel.create(deckName);
   FStapel.mischen;
-  Writeln(IntToStr(FStapel.FKarten.count) + 'Karten geladen');
+  showOutput(IntToStr(FStapel.FKarten.count) + ' Karten geladen');
 end;
 
 procedure TSpiel.ziehen(anz: Integer);
@@ -156,8 +155,8 @@ begin
     for i := 1 to anz do
     begin
       k := FStapel.zieheKarte;
-      Writeln(IntToStr(i) + ' gezogen:');
-      Writeln(Utf8String(k.aufdecken));
+      showOutput(IntToStr(i) + ' gezogen:');
+      showOutput(k.aufdecken);
       if k.FZahl = 0 then
         break;
     end; // end loop
@@ -224,16 +223,23 @@ begin
           laden(FStapel.FName);
         'q':
           lInput := '.'; // end this loop
-        '.':
-          Writeln('Und Tschüß');
       else
-        Writeln('unbekannter Befehl ' + lInput);
+        showOutput('unbekannter Befehl ' + lInput);
       end;
       lLastInput := lInput;
     until lInput = '.';
+    showOutput('Und Tschuess!');
   finally
     lCmdList.Free;
   end;
 end; // verarbeiteEingabe
+
+procedure TSpiel.showOutput(s: String);
+begin
+  SetConsoleOutputCP(CP_UTF8);
+  SetTextCodePage(Output, CP_UTF8);
+
+  WriteLn(Utf8String(s));
+end;
 
 end.

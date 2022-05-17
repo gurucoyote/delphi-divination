@@ -14,8 +14,6 @@ var
 
   // main
 begin
-  SetConsoleOutputCP(CP_UTF8);
-  SetTextCodePage(Output, CP_UTF8);
 
   try // outer app try block
     lSpiel := TSpiel.create;
