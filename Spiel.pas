@@ -31,9 +31,13 @@ type
 
     FName: String;
 
-    TZiehStapel: TStapel;
+    FStapel: TStapel;
     FAblageStapel: TStapel;
 
+    function verarbeiteCmdZeile: String;
+    procedure verarbeiteEingabe(lastInput: String);
+    procedure laden(deckName: String);
+    procedure ziehen(anz: Integer);
   end;
 
 implementation
@@ -134,5 +138,102 @@ begin
       Result := -1 + random(3);
     end));
 end;
+
+procedure TSpiel.laden(deckName: String);
+begin
+  FStapel := TStapel.create(deckName);
+  FStapel.mischen;
+  Writeln(IntToStr(FStapel.FKarten.count) + 'Karten geladen');
+end;
+
+procedure TSpiel.ziehen(anz: Integer);
+var
+  k: TKarte;
+  i: Integer;
+begin
+  k := TKarte.create('', -1, '', '');
+  try
+    for i := 1 to anz do
+    begin
+      k := FStapel.zieheKarte;
+      Writeln(IntToStr(i) + ' gezogen:');
+      Writeln(Utf8String(k.aufdecken));
+      if k.FZahl = 0 then
+        break;
+    end; // end loop
+  finally
+    k.Free;
+  end; // try
+end;
+
+function TSpiel.verarbeiteCmdZeile: String;
+var
+  lInput: String;
+begin
+  Result := '';
+  if FindCmdLineSwitch('l', lInput) then
+  begin
+    laden(lInput);
+    if FindCmdLineSwitch('z', lInput) then
+    begin
+      try
+        ziehen(StrToInt(lInput));
+      except
+        ziehen(1);
+      end;
+    end; // end z param
+    // if user didn't request interactive mode, exit
+    if FindCmdLineSwitch('i', lInput) then
+      Result := 'z'
+    else
+      halt(0);
+  end;
+end; // handleCmdLineParms
+
+procedure TSpiel.verarbeiteEingabe(lastInput: String);
+var
+  lInput, lLastInput: String;
+  lCmdList: TStrings;
+begin
+  lCmdList := TStringList.create;
+  lLastInput := lastInput;
+  try
+    repeat
+      ReadLn(lInput);
+      if lInput.length = 0 then
+        lInput := lLastInput;
+
+      lCmdList.clear;
+      ExtractStrings([' '], [], PChar(lInput), lCmdList);
+      case lCmdList[0][1] of
+        'l':
+          begin
+            if lCmdList.count > 1 then
+              laden(lCmdList[1])
+            else
+              laden('test');
+          end;
+        'z':
+          begin
+            if lCmdList.count > 1 then
+              ziehen(StrToInt(lCmdList[1]))
+            else
+              ziehen(1);
+          end;
+        'm':
+          laden(FStapel.FName);
+        'q':
+          lInput := '.'; // end this loop
+        '.':
+          Writeln('Und Tschüß');
+      else
+        Writeln('unbekannter Befehl ' + lInput);
+      end;
+      lLastInput := lInput;
+    until lInput = '.';
+  finally
+    lCmdList.Free;
+  end;
+end; // verarbeiteEingabe
 
 end.
