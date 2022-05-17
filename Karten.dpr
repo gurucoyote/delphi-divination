@@ -6,10 +6,12 @@ program Karten;
 
 uses
 	System.SysUtils,
+	Classes,
 	Spiel in 'Spiel.pas';
 
 var
-	s: String;
+	lInput, lLastInput: String;
+	lCmdList: TStrings;
 	stapel: TStapel;
 
 	procedure laden(deckName: String);
@@ -41,18 +43,46 @@ begin
 	// main
 begin
 	try
-
-		//  process user input
+	lCmdList := TStringList.create;
+	try
+		lLastInput := '.';
 		repeat
-			Readln(s);
-			case s[1] of
-			'l': laden('test');
-			'z': ziehen(1);
-		else s := '.'; // end this loop
-	end;
-	// Writeln('Eingabe: ' + s);  
-until s = '.';
+			ReadLn(lInput);
+			if lInput.length = 0 then 
+	lInput := lLastInput;
 
+	lCmdList.clear;
+ExtractStrings([' '], [], PChar(lInput), lCmdList);
+var c: Integer;
+for c := 0 to lCmdList.count-1 do
+	begin
+	WriteLn(lCmdList[c]);
+end;
+
+			case lCmdList[0][1] of
+			'l': begin
+				if lCmdList.count > 1 then
+					laden(lCmdList[1] )
+				else 
+				laden('test');
+			end;
+			'z': begin
+				if lCmdList.count > 1 then
+					ziehen(StrToInt(lCmdList[1]))
+				else
+					ziehen(1);
+			end;
+			'm': laden(stapel.FName);
+			'q': lInput := '.';// end this loop
+		else  WriteLn('unbekannter Befehl ' + lInput);
+	end;
+	lLastInput := lInput;
+until lInput = '.';
+
+  finally
+	  lCmdList.free;
+stapel.free;
+end;
   except
 	  on E: Exception do
 		  Writeln(E.ClassName, ': ', E.Message);
