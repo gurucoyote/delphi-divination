@@ -61,9 +61,15 @@ begin
   s := FName;
   case random(2) of
     0:
-      s := s + sLineBreak + 'Dunkel: ' + FDunkel;
+      begin
+        s := s + sLineBreak + 'Dunkel: ' + FDunkel;
+        s := s + sLineBreak + '(Hell: ' + FHell + ')';
+      end;
     1:
-      s := s + sLineBreak + 'Hell: ' + FHell;
+      begin
+        s := s + sLineBreak + 'Hell: ' + FHell;
+        s := s + sLineBreak + '(dunkel: ' + FDunkel + ')';
+      end;
   else
     Writeln('huh?');
   end;
