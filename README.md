@@ -21,3 +21,11 @@ This little project was created to get my fingers wet in writing Delphi (10.3) c
 - Delphi 10.3 or higher, the free community edition should do
 - some knowledge of how to build via the command line (will give examples soon)
 
+### building a delpi  project in cmd
+
+```
+echo Load resvars.bat
+call "C:\Program Files (x86)\Embarcadero\Studio\21.0\bin\rsvars.bat"
+echo run msbuild
+msbuild.exe -v:q -nologo
+```
