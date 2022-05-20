@@ -8,7 +8,6 @@ echo building Release
 msbuild.exe -v:q -nologo -p:config=release || goto :error
 :: only do this if no error occured
 echo OK
-del needbuild.txt
 :: obviously jump over error reporting
 goto :EOF
    :error
