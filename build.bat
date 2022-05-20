@@ -13,4 +13,3 @@ del needbuild.txt
 goto :EOF
    :error
 echo FAILED
-:EOF
