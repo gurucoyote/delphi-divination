@@ -1,10 +1,16 @@
-@echo off
-echo change to dir this script lives in
-@echo on
+@echo off 
+:: IMPORTANT: change to dir this script lives in
 cd /D %~dp0
-@echo off
-echo Load resvars.bat
+:: need to load the rsvars.bat to setup enviroment
 call "C:\Program Files (x86)\Embarcadero\Studio\21.0\bin\rsvars.bat"
-echo run msbuild
-msbuild.exe -v:q -nologo
-dir /b win32
+:: actual build script
+echo building Release
+msbuild.exe -v:q -nologo -p:config=release || goto :error
+:: only do this if no error occured
+echo OK
+del needbuild.txt
+:: obviously jump over error reporting
+goto :EOF
+   :error
+echo FAILED
+:EOF
